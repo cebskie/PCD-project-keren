@@ -654,9 +654,6 @@ def main():
                             with img_col3:
                                 st.image(result['mask'], caption="Lung Mask", use_container_width=True, clamp=True)
                             
-                            # Feature Details
-                            if st.checkbox(f"Show extracted features for {result['filename']}", key=f"features_{idx}"):
-                                st.json(result['features'])
     
     with tab2:
         uploaded_zip = st.file_uploader(
@@ -759,7 +756,6 @@ def main():
                         )
     
     # Footer
-    st.divider()
     st.markdown("""
         <div class="footer">
             <p>🏥 <strong>TB Detection System</strong> | Digital Image Processing Project</p>
