@@ -129,27 +129,52 @@ st.markdown("""
     .stAlert {
         margin-top: 1rem;
     }
-    .upload-box {
-        border: 2px dashed #4CAF50;
-        border-radius: 10px;
-        padding: 2rem;
-        text-align: center;
-        background-color: #f0f8ff;
-        margin: 1rem 0;
+    .header-title {
+        font-size: 48px !important;
+        color: #FCFCD !important;
+        text-align: center !important;
+        padding: 1rem !important;
+        font-weight: bold !important;
+        margin-bottom: 5 !important;
+        margin-top: -3rem !important;
     }
     .result-card {
-        padding: 1.5rem;
-        border-radius: 10px;
+        padding: 1rem;
+        border-radius: 5px;
         margin: 1rem 0;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .result-card h3 {
+        font-weight: bold !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .result-card p {
+        color: #2c3e50 !important;
+        font-size: 20px !important;
+        margin: 0.3rem 0 !important;
     }
     .normal-result {
         background-color: #d4edda;
         border-left: 5px solid #28a745;
     }
+    .normal-result h3 {
+        color: #155724 !important;
+    }
     .tb-result {
         background-color: #f8d7da;
         border-left: 5px solid #dc3545;
+    }
+    .tb-result h3 {
+        color: #721c24 !important;
+    }
+    .tb-result p strong {
+        font-size: 16px !important;
+        color: #721c24 !important;
+    }
+    .tb-result text{
+        font-size: 12px !important;
+        color: #faf7f7 !important;
+        font-weight: bold !important;
     }
     .metric-box {
         background-color: #e7f3ff;
@@ -165,7 +190,7 @@ st.markdown("""
     }
     .footer {
         text-align: center;
-        padding: 2rem 0;
+        padding: 2rem 0 !important;
         color: #7f8c8d;
         border-top: 1px solid #ecf0f1;
         margin-top: 3rem;
@@ -451,7 +476,7 @@ def create_results_dataframe(results):
 
 def main():
     # Header
-    st.markdown("<h1>🫁 Tuberculosis Detection System</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='header-title'>🫁 Tuberculosis Detection System</h1>", unsafe_allow_html=True)
     st.markdown("---")
     
     # Load models
@@ -463,8 +488,17 @@ def main():
     
     st.success("✅ Models loaded successfully!")
     
-    # Sidebar Configuration
-    st.sidebar.header("⚙️ Configuration")
+    #Sidebar
+    st.sidebar.markdown("""
+        <div style="background-color: #ffebee; padding: 1rem; border-radius: 5px; border-left: 4px solid #d32f2f; margin-bottom: 1rem;">
+            <p style="color: #c62828; margin: 0; font-weight: 500;">
+                ⚠️ This application is for educational purposes only. Not for clinical use.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.sidebar.markdown("---")
+    st.sidebar.header("Model Configuration")
     
     model_choice = st.sidebar.selectbox(
         "Select AI Model:",
@@ -494,20 +528,12 @@ def main():
     )
     
     # Main Content
-    st.header("📤 Upload Chest X-Ray Images")
+    st.header("Upload Chest X-Ray Images", "")
     
     # Create tabs for different upload methods
-    tab1, tab2 = st.tabs(["📁 Single/Multiple Files", "📦 ZIP Folder"])
+    tab1, tab2 = st.tabs(["Single/Multiple Files", "ZIP Folder"])
     
     with tab1:
-        st.markdown("""
-            <div class="upload-box">
-                <h3>🖼️ Drag & Drop or Browse</h3>
-                <p>Upload one or more chest X-ray images</p>
-                <p><small>Supported formats: PNG, JPG, JPEG</small></p>
-            </div>
-        """, unsafe_allow_html=True)
-        
         uploaded_files = st.file_uploader(
             "Choose image files",
             type=["png", "jpg", "jpeg"],
@@ -517,20 +543,22 @@ def main():
         
         if uploaded_files:
             st.success(f"✅ {len(uploaded_files)} file(s) uploaded successfully!")
-            
             # Preview uploaded images
-            if st.checkbox("👁️ Preview uploaded images", value=True):
-                cols = st.columns(min(len(uploaded_files), 4))
-                for idx, uploaded_file in enumerate(uploaded_files[:4]):
-                    with cols[idx]:
+            if st.checkbox("Preview uploaded images", value=True):
+                # Gunakan 6 kolom agar preview lebih kecil
+                cols = st.columns(6)
+                for idx, uploaded_file in enumerate(uploaded_files[:6]):
+                    with cols[idx % 6]:
                         image = Image.open(uploaded_file)
-                        st.image(image, caption=uploaded_file.name, use_column_width=True)
+                        # Resize image untuk thumbnail preview
+                        image.thumbnail((150, 150))
+                        st.image(image, caption=uploaded_file.name, use_container_width=True)
                 
-                if len(uploaded_files) > 4:
-                    st.info(f"Showing 4 of {len(uploaded_files)} images. All will be processed.")
+                if len(uploaded_files) > 6:
+                    st.info(f"Showing 6 of {len(uploaded_files)} images. All will be processed.")
             
             # Predict Button
-            if st.button("🔬 Start Prediction", type="primary", use_container_width=True):
+            if st.button("🔬 Start Prediction", type="primary",use_container_width=True):
                 results = []
                 
                 progress_bar = st.progress(0)
@@ -552,7 +580,7 @@ def main():
                 
                 # Display Results
                 st.markdown("---")
-                st.header("📊 Prediction Results")
+                st.header("Prediction Results", 'font size=32px;')
                 
                 # Summary Statistics
                 if results:
@@ -591,7 +619,7 @@ def main():
                     # Download Results
                     csv = results_df.to_csv(index=False)
                     st.download_button(
-                        label="📥 Download Results (CSV)",
+                        label="Download Results (CSV)",
                         data=csv,
                         file_name=f"tb_detection_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                         mime="text/csv"
@@ -618,27 +646,19 @@ def main():
                             img_col1, img_col2, img_col3 = st.columns(3)
                             
                             with img_col1:
-                                st.image(result['original'], caption="Original (Resized)", use_column_width=True, clamp=True)
+                                st.image(result['original'], caption="Original (Resized)", use_container_width=True, clamp=True)
                             
                             with img_col2:
-                                st.image(result['enhanced'], caption="Enhanced (CLAHE)", use_column_width=True, clamp=True)
+                                st.image(result['enhanced'], caption="Enhanced (CLAHE)", use_container_width=True, clamp=True)
                             
                             with img_col3:
-                                st.image(result['mask'], caption="Lung Mask", use_column_width=True, clamp=True)
+                                st.image(result['mask'], caption="Lung Mask", use_container_width=True, clamp=True)
                             
                             # Feature Details
                             if st.checkbox(f"Show extracted features for {result['filename']}", key=f"features_{idx}"):
                                 st.json(result['features'])
     
     with tab2:
-        st.markdown("""
-            <div class="upload-box">
-                <h3>📦 Upload ZIP File</h3>
-                <p>Upload a ZIP file containing multiple chest X-ray images</p>
-                <p><small>The ZIP will be extracted and all images will be processed</small></p>
-            </div>
-        """, unsafe_allow_html=True)
-        
         uploaded_zip = st.file_uploader(
             "Choose a ZIP file",
             type=["zip"],
@@ -725,20 +745,21 @@ def main():
                             st.markdown('</div>', unsafe_allow_html=True)
                         
                         # Results Table
-                        st.subheader("📋 Summary Table")
+                        st.subheader("Summary Table")
                         results_df = create_results_dataframe(results)
                         st.dataframe(results_df, use_container_width=True)
                         
                         # Download Results
                         csv = results_df.to_csv(index=False)
                         st.download_button(
-                            label="📥 Download Results (CSV)",
+                            label="Download Results (CSV)",
                             data=csv,
                             file_name=f"tb_detection_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                             mime="text/csv"
                         )
     
     # Footer
+    st.divider()
     st.markdown("""
         <div class="footer">
             <p>🏥 <strong>TB Detection System</strong> | Digital Image Processing Project</p>
