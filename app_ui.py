@@ -23,7 +23,7 @@ warnings.filterwarnings('ignore')
 # HIERARCHICAL CLASSIFIER CLASS
 # ============================================================================
 
-class klasifikasiHierarkis:
+class HierarchicalClassifier:
     """
     Hierarchical classification:
     Stage 1: Shape features (initial screening)
