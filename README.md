@@ -3,11 +3,6 @@
 # 🫁 Deteksi TBC Otomatis
 **Skema Ekstraksi Fitur Hierarkis pada Citra X-Ray Dada**
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
-
 <p align="center">
   <a href="#-gambaran-umum">Gambaran Umum</a> •
   <a href="#-metodologi--fitur">Metodologi</a> •
@@ -23,27 +18,31 @@
 ---
 
 ## 🏛️ Identitas Proyek
-> **Final Project Mata Kuliah MII212204 - Pengolahan Citra Digital (Kelas KOM)** > Departemen Ilmu Komputer dan Elektronika, FMIPA UGM - Semester Gasal 2025.
+
+**Final Project Mata Kuliah MII212204 - Pengolahan Citra Digital (Kelas KOM)** 
+Departemen Ilmu Komputer dan Elektronika, FMIPA UGM - Semester Gasal 2025.
 
 ### 👥 Kelompok 4
-| NIM | Nama Anggota | 
+
+| **NIM** | **Nama Anggota** | 
 | :--- | :--- | :--- |
-| **23/521206/PA/22409** | **Salmaa Ceiba Abdillah** | 
-| **24/534421/PA/22664** | **Kenji Ratanaputra** | 
-| **24/540342/PA/22939** | **Ivan Zuhri Ramadhani Syahrial** | 
-| **24/543855/PA/23113** | **Farsya Nabila Tori** | 
+| 23/521206/PA/22409 | Salmaa Ceiba Abdillah | 
+| 24/534421/PA/22664 | Kenji Ratanaputra | 
+| 24/540342/PA/22939 | Ivan Zuhri Ramadhani Syahrial | 
+| 24/543855/PA/23113 | Farsya Nabila Tori | 
 
 ---
 
 ## 📋 Gambaran Umum
-**TBScan** (nama proyek ini) adalah sistem *Computer-Aided Diagnosis* (CAD) untuk mendeteksi Tuberkulosis (TBC) dari citra Chest X-Ray (CXR).
 
-Berbeda dengan pendekatan *Deep Learning* (CNN) yang "Black Box", proyek ini mengusung konsep **Explainable AI** dengan meniru cara kerja dokter radiologi:
+**Tujuan Proyek** ini adalah untuk mengimplementasikan skema Ekstraksi Fitur Hierarkis untuk mendeteksi TBC melalui abnormalitas bentuk dan tekstur paru.
+
+Model yang digunakan ini meniru cara kerja radiolog, yaitu
 1. **Analisis Bentuk:** Melihat apakah paru-paru menyusut atau berubah bentuk (efusi pleura).
 2. **Analisis Tekstur:** Melihat apakah ada bercak putih/kabut (infiltrat/konsolidasi) di dalam paru.
 
 ### 🔍 Pipeline Sistem
-Berikut adalah visualisasi lengkap proses dari citra mentah hingga hasil deteksi (Segmentasi Sensitif & Insensitif):
+Berikut adalah visualisasi lengkap proses dari citra mentah hingga hasil deteksi:
 
 ![Complete Pipeline](assets/pipeline_good.png)
 *(Gambar: Proses Preprocessing, Segmentasi, hingga Ekstraksi Fitur)*
@@ -52,9 +51,7 @@ Berikut adalah visualisasi lengkap proses dari citra mentah hingga hasil deteksi
 
 ## 🚀 Metodologi & Fitur
 
-Kami mengimplementasikan **Skema Hierarkis** yang diadaptasi dari penelitian *Chandra et al. (2020)*:
-
-### 1. Pra-pemrosesan (Preprocessing)
+### 1. Preprocessing
 * **CLAHE:** Meningkatkan kontras lokal agar detail jaringan paru terlihat jelas.
 * **Gaussian Filter:** Mengurangi *noise* bintik-bintik pada hasil X-Ray.
 
@@ -94,15 +91,9 @@ Berikut adalah perbandingan performa model dalam memprediksi kelas Normal vs TBC
 
 ## 💻 Cara Menjalankan
 
-Ikuti langkah berikut untuk menjalankan proyek ini di lokal komputer teman-teman:
-
-### Prasyarat
-* Python 3.8+
-* Git
-
 ### 1. Clone Repository
 ```bash
-git clone [https://github.com/cebskie/PCD-project-keren.git](https://github.com/cebskie/PCD-project-keren.git)
+git clone https://github.com/cebskie/PCD-project-keren.git
 cd PCD-project-keren
 ```
 
@@ -124,23 +115,36 @@ streamlit run app_ui.py
 ```
 ---
 
-## 📂 Struktur Direktori & Lokasi Laporan
+## 📂 Struktur Direktori 
 
 Berikut adalah susunan folder dalam repositori ini.
-PCD-project-keren/ ├── assets/ # Gambar-gambar pendukung README (pipeline, hasil) ├── data/ # Folder penyimpanan dataset & sampel citra ├── docs/ # 📄 LAPORAN FINAL PROJECT ADA DI SINI │ └── Final Project Report_Kelompok 4.pdf ├── models/ # File model Machine Learning yang sudah dilatih (.pkl) │ ├── nb_model.pkl │ └── svm_model.pkl ├── notebooks/ # File Jupyter Notebook untuk eksperimen & training │ └── Prediction.ipynb ├── app_ui.py # Source code utama aplikasi web (Streamlit) ├── requirements.txt # Daftar library yang dibutuhkan └── README.md # Dokumentasi proyek
----
-
+```text
+PCD-project-keren/
+├── assets/                  # Gambar-gambar pendukung README (pipeline, hasil)
+├── data/                    # Folder penyimpanan dataset & sampel citra
+├── docs/                    # 📄 Laporan Final Project
+│   └── Final Project Report_Kelompok 4.pdf
+├── models/                  # File model Machine Learning yang sudah dilatih (.pkl)
+│   ├── nb_model.pkl
+│   └── svm_model.pkl
+├── notebooks/               # File Jupyter Notebook untuk eksperimen & training
+│   ├── Prediction.ipynb
+│   └── tebese.ipynb
+├── app_ui.py                # Source code utama aplikasi web (Streamlit)
+├── requirements.txt         # Daftar library yang dibutuhkan
+└── README.md                # Dokumentasi proyek
+```
 ---
 
 ## 🎥 Demo Video
-
+Video presentasi dan demo aplikasi sederhana
 [![Tonton Demo TBScan](https://img.youtube.com/vi/FgsaLDQ-KOM/maxresdefault.jpg)](https://youtu.be/FgsaLDQ-KOM)
 
 ---
 
 ## 🔗 Referensi
 
-Proyek ini dibangun berdasarkan studi literatur utama berikut:
+Proyek ini dibuat berdasarkan studi literatur utama berikut:
 
 * T. B. Chandra et al., *"Automatic detection of tuberculosis related abnormalities in Chest X-ray images using hierarchical feature extraction scheme,"* Expert Systems with Applications, vol. 158, 113514, 2020.
 
