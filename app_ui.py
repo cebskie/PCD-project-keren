@@ -205,8 +205,8 @@ st.markdown("""
 @st.cache_resource
 def load_models(base_path='.'):
     """Load trained models from disk."""
-    svm_path = os.path.join(base_path, 'svm_model.pkl')
-    nb_path = os.path.join(base_path, 'nb_model.pkl')
+    svm_path = os.path.join(base_path, 'models', 'svm_model.pkl')
+    nb_path = os.path.join(base_path, 'models', 'nb_model.pkl')
     
     # Check if model files exist
     if not os.path.exists(svm_path) or not os.path.exists(nb_path):
