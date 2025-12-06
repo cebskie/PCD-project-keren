@@ -19,17 +19,17 @@
 
 ## 🏛️ Identitas Proyek
 
-**Final Project Mata Kuliah MII212204 - Pengolahan Citra Digital (Kelas KOM)** 
+**Final Project Mata Kuliah MII212204 - Pengolahan Citra Digital (Kelas KOM)** <br>
 Departemen Ilmu Komputer dan Elektronika, FMIPA UGM - Semester Gasal 2025.
 
 ### 👥 Kelompok 4
 
-| **NIM** | **Nama Anggota** | 
-| :--- | :--- | :--- |
-| 23/521206/PA/22409 | Salmaa Ceiba Abdillah | 
-| 24/534421/PA/22664 | Kenji Ratanaputra | 
-| 24/540342/PA/22939 | Ivan Zuhri Ramadhani Syahrial | 
-| 24/543855/PA/23113 | Farsya Nabila Tori | 
+| NIM | Nama Anggota |
+| :--- | :--- |
+| 23/521206/PA/22409 | Salmaa Ceiba Abdillah |
+| 24/534421/PA/22664 | Kenji Ratanaputra |
+| 24/540342/PA/22939 | Ivan Zuhri Ramadhani Syahrial |
+| 24/543855/PA/23113 | Farsya Nabila Tori |
 
 ---
 
@@ -41,8 +41,8 @@ Model yang digunakan ini meniru cara kerja radiolog, yaitu
 1. **Analisis Bentuk:** Melihat apakah paru-paru menyusut atau berubah bentuk (efusi pleura).
 2. **Analisis Tekstur:** Melihat apakah ada bercak putih/kabut (infiltrat/konsolidasi) di dalam paru.
 
-### 🔍 Pipeline Sistem
-Berikut adalah visualisasi lengkap proses dari citra mentah hingga hasil deteksi:
+### 🔍 Pipeline 
+Berikut adalah visualisasi lengkap proses dari citra yang diinputkan hingga hasil deteksi:
 
 ![Complete Pipeline](assets/pipeline_good.png)
 *(Gambar: Proses Preprocessing, Segmentasi, hingga Ekstraksi Fitur)*
@@ -52,8 +52,8 @@ Berikut adalah visualisasi lengkap proses dari citra mentah hingga hasil deteksi
 ## 🚀 Metodologi & Fitur
 
 ### 1. Preprocessing
-* **CLAHE:** Meningkatkan kontras lokal agar detail jaringan paru terlihat jelas.
 * **Gaussian Filter:** Mengurangi *noise* bintik-bintik pada hasil X-Ray.
+* **CLAHE:** Meningkatkan kontras lokal agar detail jaringan paru terlihat jelas.
 
 ### 2. Dual-Path Segmentation
 Kami menggunakan dua strategi segmentasi untuk tujuan berbeda:
@@ -63,7 +63,7 @@ Kami menggunakan dua strategi segmentasi untuk tujuan berbeda:
 | **Sensitif** 🔴 | *Otsu Thresholding* | Mengambil area rongga udara murni. Jika ada cairan/efusi, area ini menyusut $\rightarrow$ Deteksi **Bentuk**. |
 | **Insensitif** 🔵 | *Global Threshold + Morphological Closing* | Mengambil bentuk anatomis paru secara utuh (inklusif). Menutupi area sakit agar teksturnya bisa dianalisis $\rightarrow$ Deteksi **Tekstur**. |
 
-### 3. Ekstraksi Fitur (Handcrafted)
+### 3. Ekstraksi Fitur 
 Total 21+ fitur diekstraksi untuk setiap citra:
 * **Shape Features:** Area, Perimeter, Eccentricity, Aspect Ratio.
 * **Statistical Features (FOSF):** Mean, Variance, Kurtosis, Skewness.
@@ -76,9 +76,9 @@ Total 21+ fitur diekstraksi untuk setiap citra:
 Kami membandingkan performa dua algoritma klasifikasi pada dataset Shenzhen.
 
 ### Perbandingan Akurasi
-| Metode | Precision | Recall (Sensitivitas) | F1-Score | Akurasi Total |
+| Metode | Precision | Recall | F1-Score | Akurasi Total |
 | :--- | :---: | :---: | :---: | :---: |
-| **SVM (Hierarchical)** 🏆 | **71.00%** | **90.00%** | **79.00%** | **75.94%** |
+| SVM (Hierarchical) | 71.00% | 90.00% | 79.00% | 75.94% |
 | Naive Bayes | 61.00% | 75.00% | 68.00% | 63.16% |
 
 > **Highlight:** SVM memiliki **Recall 90%**, yang berarti sangat sensitif dalam mendeteksi pasien positif TBC (meminimalkan False Negative).
@@ -137,7 +137,7 @@ PCD-project-keren/
 ---
 
 ## 🎥 Demo Video
-Video presentasi dan demo aplikasi sederhana
+Video presentasi dan demo aplikasi sederhana:
 [![Tonton Demo TBScan](https://img.youtube.com/vi/FgsaLDQ-KOM/maxresdefault.jpg)](https://youtu.be/FgsaLDQ-KOM)
 
 ---
