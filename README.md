@@ -20,7 +20,7 @@
 ## 🏛️ Identitas Proyek
 
 **Final Project Mata Kuliah MII212204 - Pengolahan Citra Digital (Kelas KOM)** <br>
-Departemen Ilmu Komputer dan Elektronika, FMIPA UGM - Semester Gasal 2025.
+Departemen Ilmu Komputer dan Elektronika, FMIPA UGM - Semester Gasal 2025
 
 ### 👥 Kelompok 4
 
@@ -137,7 +137,7 @@ PCD-project-keren/
 ---
 
 ## 🎥 Demo Video
-Video presentasi dan demo aplikasi sederhana:
+Video presentasi dan demo laman sederhana:
 [![Tonton Demo TBScan](https://img.youtube.com/vi/FgsaLDQ-KOM/maxresdefault.jpg)](https://youtu.be/FgsaLDQ-KOM)
 
 ---
@@ -151,6 +151,6 @@ Proyek ini dibuat berdasarkan studi literatur utama berikut:
 ---
 <div align="center">
 
-Made with ❤️ by Kelompok 4 PCD KOM UGM
+Made with 🩷 by Kelompok 4 PCD KOM UGM
 
 </div>
